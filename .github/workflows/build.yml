@@ -1,0 +1,34 @@
+name: Build article PDF
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    # Times New Roman и Courier New есть в образе Windows; на ubuntu-latest
+    # шрифта нет, и класс уходит в запасной TeX Gyre.
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: wtfjoke/setup-tectonic@v4
+        with:
+          tectonic-version: "0.17.0"
+
+      - name: Build article PDF
+        run: |
+          mkdir -p build
+          tectonic -o build article.tex
+
+      - name: Upload article PDF
+        uses: actions/upload-artifact@v7
+        with:
+          name: article-pdf
+          path: build/article.pdf
+          retention-days: 90
+          if-no-files-found: error
