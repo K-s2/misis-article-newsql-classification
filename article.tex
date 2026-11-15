@@ -161,7 +161,8 @@ MySQL-протокол \newline
 \begin{table*}[t]
 \caption{Архитектурные профили распределённых SQL-СУБД}\label{tab:profiles}
 \centering
-\footnotesize
+\scriptsize
+\setlength{\tabcolsep}{3.5pt}
 \begin{tabular}{llllllll}
 \toprule
 \textbf{Система} & \textbf{К1} & \textbf{К2} & \textbf{К3} & \textbf{К4} & \textbf{К5} & \textbf{К6} & \textbf{К7} \\
@@ -171,7 +172,7 @@ MySQL + Vitess~\cite{vitess} & Э & M & 2PC + репликация шардов 
 MySQL Cluster (NDB) & Э & N & синхронная кластерная & нет & read committed & in-memory + диск & MySQL-диалект \\
 Oracle RAC & Э & S & Cache Fusion & нет & read committed & B-tree & собственный \\
 Amazon Aurora~\cite{aurora} & Э & S & кворум записи 4/6 & нет (в зоне записи) & read committed (SI опц.) & log-structured & MySQL и PostgreSQL \\
-Google Spanner~\cite{spanner} & Р & N & Paxos по сплитам & TrueTime & snapshot (внешне согл.) & таблетки на Colossus & собственный (+ опц.\ PG) \\
+Google Spanner~\cite{spanner} & Р & N & Paxos по сплитам & TrueTime & snapshot (внеш. согл.) & таблетки на Colossus & собств.\ (+ PG) \\
 CockroachDB~\cite{crdb} & Р & N & Raft по диапазонам & HLC & serializable & LSM (Pebble) & PostgreSQL \\
 YugabyteDB~\cite{yugabyte} & Р & N & Raft (DocDB) & HLC & snapshot & LSM (DocDB) & PostgreSQL \\
 TiDB~\cite{tidb} & Р & N & Raft (TiKV) + PD & TSO & snapshot (SI) & LSM + колонки & MySQL \\
